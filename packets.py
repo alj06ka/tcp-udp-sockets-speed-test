@@ -17,8 +17,19 @@ class PacketGenerator:
     def reset_seed(self):
         self.random.seed(self.seed)
 
+
 class PacketValidator(PacketGenerator):
     def validate_packet(self, packet, packet_size):
         if packet == self.generate_packet(packet_size):
             return True
         return False
+
+
+if __name__ == "__main__":
+    randomizer = PacketGenerator(10000, is_different=True)
+    packet_1 = randomizer.generate_packet(1024)
+    packet_2 = randomizer.generate_packet(1024)
+
+    validator = PacketValidator(10000, is_different=True)
+    print(validator.validate_packet(packet_1, 1024))
+    print(validator.validate_packet(packet_2, 1024))
